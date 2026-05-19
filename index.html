@@ -8,22 +8,22 @@
 <style>
 :root{
   --bg:#eef3fb;
+  --panel:#ffffff;
   --ink:#0f172a;
   --muted:#64748b;
-  --panel:#ffffff;
-  --line:#dbe3ef;
+  --line:#dbe4f0;
   --blue:#2563eb;
   --purple:#7c3aed;
   --green:#059669;
   --orange:#ea580c;
   --red:#dc2626;
-  --amber:#d97706;
-  --shadow:0 14px 35px rgba(15,23,42,.09);
+  --yellow:#f59e0b;
+  --shadow:0 14px 35px rgba(15,23,42,.10);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-  font-family:Arial,sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
   background:var(--bg);
   color:var(--ink);
 }
@@ -40,9 +40,9 @@ body{
   width:280px;
   background:#07111f;
   color:white;
-  padding:25px 22px;
-  overflow-y:auto;
-  z-index:20;
+  padding:26px 22px;
+  overflow:auto;
+  z-index:10;
 }
 .sidebar h1{
   font-size:22px;
@@ -53,7 +53,6 @@ body{
   color:#94a3b8;
   font-size:14px;
   margin-bottom:28px;
-  line-height:1.4;
 }
 .sidebar a{
   display:block;
@@ -61,53 +60,61 @@ body{
   text-decoration:none;
   padding:13px 14px;
   border-radius:14px;
-  margin-bottom:9px;
-  font-weight:bold;
+  margin-bottom:8px;
+  font-weight:700;
 }
 .sidebar a:hover{background:#1e293b}
 .main{
   grid-column:2;
-  padding:25px;
-  max-width:1500px;
-  width:100%;
+  padding:26px;
+  min-width:0;
 }
 .hero{
   background:linear-gradient(135deg,#0f172a,#1e3a8a,#7c3aed);
   color:white;
-  border-radius:28px;
-  padding:35px;
-  margin-bottom:25px;
+  border-radius:30px;
+  padding:34px;
+  margin-bottom:24px;
   box-shadow:var(--shadow);
 }
-.hero h2{font-size:44px;margin-bottom:12px}
-.hero p{color:#dbeafe;max-width:850px;line-height:1.5}
+.hero h2{
+  font-size:44px;
+  margin-bottom:12px;
+  line-height:1.05;
+}
+.hero p{
+  color:#dbeafe;
+  max-width:900px;
+  font-size:16px;
+}
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:15px;
-  margin-top:25px;
+  gap:14px;
+  margin-top:24px;
 }
 .stat{
   background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.16);
   border-radius:18px;
   padding:18px;
 }
 .stat b{font-size:30px}
-.stat span{display:block;color:#bfdbfe;font-size:13px}
+.stat span{display:block;color:#bfdbfe;font-size:13px;margin-top:4px}
 
 .panel{
-  background:white;
+  background:var(--panel);
   border-radius:24px;
   padding:22px;
-  margin-bottom:25px;
+  margin-bottom:24px;
   box-shadow:var(--shadow);
 }
-.panel h2{margin-bottom:5px}
-.panel p{color:#64748b;margin-bottom:18px}
+.panel h2{font-size:26px;margin-bottom:5px}
+.panel p{color:var(--muted);margin-bottom:18px}
 
 .map{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:repeat(3,1fr);
   gap:15px;
 }
 .lane{
@@ -121,25 +128,28 @@ body{
   padding:14px;
   border-radius:16px;
   text-align:center;
-  font-weight:bold;
+  font-weight:800;
   margin-bottom:12px;
 }
-.blue{background:#2563eb}
-.purple{background:#7c3aed}
-.green{background:#059669}
-.orange{background:#ea580c}
+.blue{background:var(--blue)}
+.purple{background:var(--purple)}
+.green{background:var(--green)}
+.orange{background:var(--orange)}
 
 .item{
   background:white;
-  border:1px solid #e2e8f0;
+  border:1px solid var(--line);
   border-radius:14px;
   padding:13px;
   margin-bottom:10px;
   cursor:pointer;
 }
-.item:hover{border-color:#2563eb;box-shadow:0 8px 20px rgba(15,23,42,.1)}
-.item b{display:block}
-.item small{color:#475569;line-height:1.35;display:block;margin-top:3px}
+.item:hover{
+  border-color:var(--blue);
+  box-shadow:0 8px 20px rgba(15,23,42,.10);
+}
+.item b{display:block;margin-bottom:3px}
+.item small{color:#475569;line-height:1.4}
 
 .controls{
   display:flex;
@@ -148,18 +158,20 @@ body{
   margin-bottom:18px;
 }
 input{
-  padding:13px;
+  padding:13px 14px;
   border:1px solid #cbd5e1;
   border-radius:14px;
-  min-width:280px;
+  min-width:300px;
+  outline:none;
 }
+input:focus{border-color:var(--blue)}
 .chip{
   border:1px solid #cbd5e1;
   background:white;
   border-radius:999px;
   padding:10px 14px;
   cursor:pointer;
-  font-weight:bold;
+  font-weight:700;
 }
 .chip.active{background:#0f172a;color:white}
 
@@ -169,54 +181,53 @@ input{
   gap:16px;
 }
 .card{
-  border:1px solid #e2e8f0;
-  border-left:7px solid #ea580c;
-  border-radius:22px;
-  padding:20px;
-  cursor:pointer;
   background:white;
-  min-height:245px;
-  display:flex;
-  flex-direction:column;
+  border:1px solid var(--line);
+  border-left:7px solid var(--orange);
+  border-radius:22px;
+  padding:18px;
+  cursor:pointer;
+  transition:.15s;
 }
-.card:hover{box-shadow:0 15px 35px rgba(15,23,42,.12);transform:translateY(-3px)}
-.card h3{font-size:20px;margin-bottom:8px}
-.card p{color:#475569;line-height:1.4;margin-bottom:12px}
-.pill-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.card:hover{
+  box-shadow:0 15px 35px rgba(15,23,42,.12);
+  transform:translateY(-3px);
+}
+.card h3{font-size:20px;margin:8px 0}
+.card p{font-size:14px;color:var(--muted);margin-bottom:12px}
+.card-meta{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:8px;
+  margin:12px 0;
+}
+.meta-line{
+  background:#f8fafc;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:9px 10px;
+  font-size:13px;
+}
+.meta-line b{display:block;font-size:11px;text-transform:uppercase;color:#64748b;margin-bottom:3px}
 .pill{
   display:inline-block;
   padding:7px 10px;
   border-radius:999px;
   font-size:12px;
-  font-weight:bold;
+  font-weight:800;
+  margin-right:6px;
+  margin-bottom:8px;
 }
 .engine-pill{background:#fff7ed;color:#c2410c}
 .ndf-yes{background:#dcfce7;color:#166534}
 .ndf-no{background:#fee2e2;color:#991b1b}
-.ndf-warn{background:#fef3c7;color:#92400e}
-.meta{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:8px;
-  margin-top:auto;
+.ndf-mixed{background:#fef3c7;color:#92400e}
+.badges{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-top:12px;
 }
-.meta-box{
-  background:#f8fafc;
-  border:1px solid #e2e8f0;
-  border-radius:14px;
-  padding:10px;
-}
-.meta-box label{
-  display:block;
-  color:#64748b;
-  font-size:11px;
-  font-weight:bold;
-  text-transform:uppercase;
-  letter-spacing:.04em;
-  margin-bottom:3px;
-}
-.meta-box div{font-size:13px;font-weight:bold;color:#0f172a;line-height:1.35}
-.badges{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}
 .badge{
   background:#eff6ff;
   color:#1d4ed8;
@@ -224,26 +235,48 @@ input{
   padding:6px 9px;
   border-radius:999px;
   font-size:12px;
-  font-weight:bold;
+  font-weight:700;
 }
 
+.best-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:14px;
+}
+.best-card{
+  background:#f8fafc;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:16px;
+  cursor:pointer;
+}
+.best-card:hover{box-shadow:0 10px 24px rgba(15,23,42,.10)}
+.best-card b{display:block;margin-bottom:6px}
+.best-card small{color:#475569}
+
+.table-wrap{overflow:auto}
 table{
   width:100%;
   border-collapse:collapse;
+  min-width:760px;
 }
 th,td{
   padding:14px;
-  border-bottom:1px solid #e2e8f0;
+  border-bottom:1px solid var(--line);
   text-align:left;
   vertical-align:top;
 }
-th{background:#0f172a;color:white}
+th{
+  background:#0f172a;
+  color:white;
+}
+tr:nth-child(even) td{background:#f8fafc}
 
 .modal{
   display:none;
   position:fixed;
   inset:0;
-  background:rgba(15,23,42,.7);
+  background:rgba(15,23,42,.72);
   align-items:center;
   justify-content:center;
   padding:20px;
@@ -277,36 +310,34 @@ th{background:#0f172a;color:white}
 }
 .box{
   background:#f8fafc;
-  border:1px solid #e2e8f0;
+  border:1px solid var(--line);
   border-radius:16px;
   padding:15px;
 }
 .box h4{margin-bottom:10px}
 ul{padding-left:20px}
 li{margin-bottom:8px}
-.note{
-  background:#fff7ed;
-  color:#9a3412;
-  border:1px solid #fed7aa;
-  border-radius:14px;
-  padding:12px;
-  font-weight:bold;
-  margin-top:12px;
+.empty{
+  display:none;
+  padding:24px;
+  text-align:center;
+  color:var(--muted);
+  font-weight:700;
 }
 
 @media(max-width:1100px){
   .app{display:block}
   .sidebar{
-    position:sticky;
-    width:100%;
+    position:relative;
+    width:auto;
     height:auto;
-    bottom:auto;
   }
-  .main{grid-column:auto;padding:18px}
-  .map,.cards,.stats{grid-template-columns:1fr 1fr}
+  .main{grid-column:auto}
+  .map,.cards,.stats,.best-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:700px){
-  .map,.cards,.stats,.two-col{grid-template-columns:1fr}
+  .main{padding:14px}
+  .map,.cards,.stats,.best-grid,.two-col{grid-template-columns:1fr}
   .hero h2{font-size:32px}
   input{min-width:100%;width:100%}
 }
@@ -318,10 +349,11 @@ li{margin-bottom:8px}
 
 <aside class="sidebar">
   <h1>💳 Sola Command Center</h1>
-  <p>Payment routing, engines, cutoffs, NDF, and recommendations.</p>
+  <p>Payment routing, engines, cutoffs, NDF, encryption support, and recommendations.</p>
   <a href="#overview">Overview</a>
   <a href="#map">System Flow</a>
   <a href="#engines">Engines</a>
+  <a href="#encryption">Encryption Support</a>
   <a href="#bestuses">Best Uses</a>
   <a href="#cutoffs">Cutoffs</a>
 </aside>
@@ -330,12 +362,12 @@ li{margin-bottom:8px}
 
 <section class="hero" id="overview">
   <h2>Sola Payment Ecosystem</h2>
-  <p>Quickly understand which backend, frontend, and engine to use based on EMV, eCommerce, ACH, PayFac, international, cutoff times, and next-day funding support.</p>
+  <p>Quickly understand which backend, frontend, and engine to use based on EMV, eCommerce, ACH, PayFac, international, cutoff time, next-day funding support, and encryption support.</p>
 
   <div class="stats">
     <div class="stat"><b>5</b><span>Backends</span></div>
     <div class="stat"><b>6</b><span>Frontends</span></div>
-    <div class="stat"><b>10</b><span>Engine Cards</span></div>
+    <div class="stat"><b>9</b><span>Engine Cards</span></div>
     <div class="stat"><b>11</b><span>Cutoff Routes</span></div>
   </div>
 </section>
@@ -348,71 +380,72 @@ li{margin-bottom:8px}
 
 <section class="panel" id="engines">
   <h2>Engine Finder</h2>
-  <p>Each card shows cutoff, backend, and NDF support directly on the card.</p>
+  <p>Each card shows route, NDF status, cutoff, default batch time, and important notes.</p>
 
   <div class="controls">
-    <input id="search" placeholder="Search EMV, EBT, TSYS, ACH, eCommerce, NDF..." />
+    <input id="search" placeholder="Search EMV, EBT, TSYS, ACH, DUKPT, encryption, eCommerce..." />
   </div>
 
   <div class="controls" id="filters"></div>
   <div class="cards" id="engineCards"></div>
+  <div class="empty" id="empty">No matching engines found.</div>
+</section>
+
+<section class="panel" id="encryption">
+  <h2>Encryption Support by Platform</h2>
+  <p>Shows which platform/route supports which encryption value.</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Encryption</th>
+          <th>Supported Platforms / Routes</th>
+          <th>Engine</th>
+          <th>Important Notes</th>
+        </tr>
+      </thead>
+      <tbody id="encryptionRows"></tbody>
+    </table>
+  </div>
 </section>
 
 <section class="panel" id="bestuses">
   <h2>Best Uses</h2>
   <p>Quick recommendation guide.</p>
-  <div class="map">
-    <div class="lane">
-      <div class="lane-title blue">Best Uses</div>
-      <div class="item" onclick="openBest('eCommerce','Start with Engine 22. eCommerce is on E22, but it is not the EMV route.')">
-        <b>eCommerce</b><small>Start with Engine 22</small>
-      </div>
-      <div class="item" onclick="openBest('Retail EMV','Start with Engine 21, Engine 22, or Engine 20 for Elavon / TSYS EMV.')">
-        <b>Retail EMV</b><small>Engine 21, 22, or 20 Elavon/TSYS</small>
-      </div>
-      <div class="item" onclick="openBest('International','Look at Engine 14 or Engine 27.')">
-        <b>International</b><small>Engine 14 or 27</small>
-      </div>
-      <div class="item" onclick="openBest('ACH / PayFac','Look at Engine 25.')">
-        <b>ACH / PayFac</b><small>Engine 25</small>
-      </div>
-      <div class="item" onclick="openBest('Traditional','Use the separate Engine 1 cards based on route: Omaha, TSYS/Elavon, Nova/Elavon, or Vantiv.')">
-        <b>Traditional</b><small>Engine 1 by route</small>
-      </div>
-    </div>
-  </div>
+  <div class="best-grid" id="bestUseCards"></div>
 </section>
 
 <section class="panel" id="cutoffs">
   <h2>Cutoff Times by Frontend and Backend</h2>
-  <p>Shows the frontend, backend, cutoff time, and default batch time EST.</p>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Frontend</th>
-        <th>Backend</th>
-        <th>Cutoff Time</th>
-        <th>Default Batch Time EST</th>
-        <th>NDF Notes</th>
-      </tr>
-    </thead>
-    <tbody id="cutoffRows"></tbody>
-  </table>
+  <p>Shows frontend, backend, cutoff time, default batch time EST, and NDF notes.</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Frontend</th>
+          <th>Backend</th>
+          <th>Cutoff Time</th>
+          <th>Default Batch Time EST</th>
+          <th>NDF Notes</th>
+        </tr>
+      </thead>
+      <tbody id="cutoffRows"></tbody>
+    </table>
+  </div>
 </section>
 
 </main>
 </div>
 
-<div class="modal" id="modal" onclick="closeModal(event)">
-  <div class="modal-card" onclick="event.stopPropagation()">
-    <button class="close" onclick="hideModal()">×</button>
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <button class="close" id="closeModalBtn">×</button>
     <div id="modalContent"></div>
   </div>
 </div>
 
 <script>
-const flow = [
+var flow = [
   {
     title:'Backends',
     color:'purple',
@@ -440,10 +473,8 @@ const flow = [
     title:'Engines',
     color:'orange',
     items:[
-      ['Engine 1 Omaha','Engine 1 route for Omaha / Fiserv'],
-      ['Engine 1 TSYS / Elavon','Engine 1 route for TSYS on Elavon'],
-      ['Engine 1 Nova / Elavon','Engine 1 route for Nova on Elavon'],
-      ['Engine 1 Vantiv','Engine 1 route for TSYS on Vantiv / Worldpay'],
+      ['Engine 1 Omaha','Traditional Omaha route'],
+      ['Engine 1 TSYS / Elavon','Traditional TSYS / Elavon route'],
       ['Engine 14','Converge Gateway'],
       ['Engine 15','Deprecated; replaced by Engine 22'],
       ['Engine 20','TSYS on Elavon + EMV'],
@@ -452,103 +483,72 @@ const flow = [
       ['Engine 25','Propay PayFac'],
       ['Engine 27','American Express Direct']
     ]
-  },
-  {
-    title:'NDF Rule',
-    color:'blue',
-    items:[
-      ['Terminal Capture','NDF can be supported depending on backend/frontend cutoff'],
-      ['Host Capture','Next-day funding is not supported'],
-      ['Batch Early','Set default batch before official cutoff to avoid missing NDF']
-    ]
   }
 ];
 
-const engines = [
+var engines = [
   {
     id:'1-omaha',
     num:'1',
-    name:'Engine 1 — Omaha',
-    backend:'Omaha / Fiserv',
+    name:'Engine 1 Omaha',
+    route:'Omaha / traditional',
+    backend:'Omaha',
     frontend:'Omaha',
-    capture:'Terminal Capture',
-    cutoff:'7:00 PM cutoff / 6:30 PM default batch',
+    cutoff:'7:00 PM',
+    batch:'6:30 PM',
     ndf:'Supported',
-    desc:'Engine 1 route specifically for Omaha processing.',
-    tags:['Traditional','Omaha','Fiserv','Terminal Capture','NDF'],
-    pros:['Separate clear Omaha path','Good for traditional Omaha processing','NDF can be supported when batched on time'],
-    cons:['Not the main modern EMV option','Must batch before cutoff'],
-    recommendations:['Use this card when the route is Omaha on Fiserv.']
+    ndfType:'yes',
+    desc:'Traditional Engine 1 card for Omaha processing.',
+    tags:['Traditional','Omaha','Card Not Present','Engine 1'],
+    pros:['Stable traditional Omaha processing','Simple setup for older Omaha routes'],
+    cons:['Not the best choice for modern EMV','Fewer modern features than Engine 22'],
+    recommendations:['Use for simple Omaha traditional processing.']
   },
   {
-    id:'1-tsys-elavon',
+    id:'1-tsys',
     num:'1',
-    name:'Engine 1 — TSYS / Elavon',
+    name:'Engine 1 TSYS / Elavon',
+    route:'TSYS / Elavon traditional',
     backend:'Elavon',
     frontend:'TSYS',
-    capture:'Terminal Capture',
-    cutoff:'7:00 PM cutoff / 6:00 PM default batch',
+    cutoff:'7:00 PM',
+    batch:'6:00 PM',
     ndf:'Supported',
-    desc:'Engine 1 route specifically for TSYS on Elavon traditional processing.',
-    tags:['Traditional','TSYS','Elavon','Terminal Capture','NDF'],
-    pros:['Clear TSYS / Elavon traditional route','NDF can be supported when batched on time'],
-    cons:['For Retail EMV, Engine 20 may be better','Fewer modern features than Engine 22'],
-    recommendations:['Use this when the merchant is on TSYS / Elavon traditional route. Use Engine 20 when TSYS / Elavon EMV is needed.']
-  },
-  {
-    id:'1-nova-elavon',
-    num:'1',
-    name:'Engine 1 — Nova / Elavon',
-    backend:'Elavon',
-    frontend:'Nova',
-    capture:'Terminal Capture',
-    cutoff:'10:00 PM cutoff / 9:45 PM default batch',
-    ndf:'Supported',
-    desc:'Engine 1 route specifically for Nova on Elavon.',
-    tags:['Traditional','Nova','Elavon','Terminal Capture','NDF'],
-    pros:['Clear Nova / Elavon route','Later default batch time than some routes'],
-    cons:['Not the main EMV route','Older traditional route'],
-    recommendations:['Use this when the route is Nova on Elavon.']
-  },
-  {
-    id:'1-vantiv',
-    num:'1',
-    name:'Engine 1 — TSYS / Vantiv',
-    backend:'Vantiv / Worldpay',
-    frontend:'TSYS',
-    capture:'Terminal Capture',
-    cutoff:'7:00 PM cutoff / 6:00 PM default batch',
-    ndf:'Supported',
-    desc:'Engine 1 route specifically for TSYS on Vantiv / Worldpay.',
-    tags:['Traditional','TSYS','Vantiv','Worldpay','Terminal Capture','NDF'],
-    pros:['Clear TSYS / Vantiv route','NDF can be supported when batched on time'],
-    cons:['Not the universal modern route','Confirm setup details by account'],
-    recommendations:['Use this when the route is TSYS on Vantiv / Worldpay.']
+    ndfType:'yes',
+    desc:'Traditional Engine 1 card for TSYS / Elavon processing.',
+    tags:['Traditional','TSYS','Elavon','Card Not Present','Engine 1'],
+    pros:['Stable TSYS / Elavon processing path','Good for simple traditional setup'],
+    cons:['Not the best choice for modern EMV','Fewer modern features than Engine 22'],
+    recommendations:['Use for simple TSYS / Elavon traditional processing.']
   },
   {
     id:'14',
     num:'14',
-    name:'Engine 14 — Converge Gateway',
+    name:'Converge Gateway',
+    route:'Converge Gateway / Elavon',
     backend:'Elavon',
     frontend:'Converge Gateway',
-    capture:'Gateway',
-    cutoff:'10:00 PM cutoff / 9:00 PM default batch',
+    cutoff:'10:00 PM',
+    batch:'9:00 PM',
     ndf:'Supported',
+    ndfType:'yes',
     desc:'Gateway path for Elavon, international, and dynamic descriptor needs.',
-    tags:['International','Multi Currency','Dynamic Descriptor','Card Not Present','Elavon','NDF'],
+    tags:['International','Multi Currency','Dynamic Descriptor','Card Not Present','Elavon'],
     pros:['Good for international payments','Supports multi-currency','Supports dynamic descriptors'],
-    cons:['Not the best retail EMV route','Fewer physical store features than EMV engines'],
+    cons:['Not the main retail EMV route','Fewer physical store features than EMV engines'],
     recommendations:['Use for international or descriptor-focused merchants.']
   },
   {
     id:'15',
     num:'15',
-    name:'Engine 15 — Rapid Connect',
+    name:'Rapid Connect',
+    route:'Deprecated',
     backend:'Deprecated',
     frontend:'Deprecated',
-    capture:'Deprecated',
-    cutoff:'Deprecated; replaced by Engine 22',
-    ndf:'Not Recommended',
+    cutoff:'Deprecated',
+    batch:'Use Engine 22',
+    ndf:'Deprecated',
+    ndfType:'mixed',
     desc:'Old Rapid Connect route. Replaced by Engine 22.',
     tags:['Deprecated','Rapid Connect','EMV'],
     pros:['Historical Rapid Connect support'],
@@ -558,73 +558,85 @@ const engines = [
   {
     id:'20',
     num:'20',
-    name:'Engine 20 — TSYS on Elavon + EMV',
+    name:'TSYS on Elavon + EMV',
+    route:'Elavon / TSYS',
     backend:'Elavon',
     frontend:'TSYS',
-    capture:'Terminal Capture',
-    cutoff:'7:00 PM cutoff / 6:00 PM default batch',
+    cutoff:'7:00 PM',
+    batch:'6:00 PM',
     ndf:'Supported',
+    ndfType:'yes',
     desc:'Card-present EMV route for TSYS on Elavon.',
-    tags:['EMV','TSYS','Elavon','Retail','Card Present','Terminal Capture','NDF'],
-    pros:['Good for Elavon / TSYS EMV','Useful for retail card-present processing'],
+    tags:['EMV','TSYS','Elavon','Retail','Card Present','DUKPT','Encryption'],
+    pros:['Good for Elavon / TSYS EMV','Useful for retail card-present processing','Works with encrypted device data when configured correctly'],
     cons:['Specific to TSYS / Elavon setups','Not the universal option like Engine 22'],
     recommendations:['Use for Retail EMV when the route is Elavon / TSYS.']
   },
   {
     id:'21',
     num:'21',
-    name:'Engine 21 — Omaha EMV + EBT',
-    backend:'Omaha / Fiserv',
+    name:'Omaha EMV + EBT',
+    route:'Fiserv Omaha',
+    backend:'Omaha',
     frontend:'Omaha',
-    capture:'Terminal Capture',
-    cutoff:'7:00 PM cutoff / 6:30 PM default batch',
+    cutoff:'7:00 PM',
+    batch:'6:30 PM',
     ndf:'Supported',
+    ndfType:'yes',
     desc:'Retail EMV and EBT route for Omaha.',
-    tags:['EMV','EBT','Retail','Omaha','Card Present','Terminal Capture','NDF'],
-    pros:['Strong retail EMV route','Supports EBT','Good for physical storefronts'],
+    tags:['EMV','EBT','Retail','Omaha','Card Present','Encryption 500'],
+    pros:['Strong retail EMV route','Supports EBT','Good for physical storefronts','Supports 500 encryption'],
     cons:['More Omaha-focused','Less flexible for broad modern routing than Engine 22'],
     recommendations:['Use for Retail EMV when Omaha and EBT are important.']
   },
   {
     id:'22',
     num:'22',
-    name:'Engine 22 — Rapid Connect Universal',
-    backend:'Omaha / North / North FACS / North FDS',
-    frontend:'North / Nashville / Buypass / eCommerce',
-    capture:'Mixed: terminal capture and host capture depending route',
-    cutoff:'Route-specific. See cutoff table.',
-    ndf:'Depends on capture type',
-    desc:'Main modern engine. Supports eCommerce and EMV routes. Buypass and Nashville are meant for EMV. eCommerce is on E22, but not meant as the EMV route.',
-    tags:['EMV','EBT','Digital Wallet','3D Secure','Dynamic Descriptor','Split Capture','AVS Only','FSA','eWIC','Enterprise','eCommerce','Retail'],
+    name:'Rapid Connect Universal',
+    route:'North / Nashville / Buypass / eCommerce',
+    backend:'Omaha or North FDS / FACS depending route',
+    frontend:'North, Nashville, Buypass, eCommerce',
+    cutoff:'Route-specific',
+    batch:'Route-specific',
+    ndf:'Mixed. Host capture does not support NDF.',
+    ndfType:'mixed',
+    desc:'Main modern engine. eCommerce is on E22, but eCommerce is not the EMV route. Buypass and Nashville are meant for EMV.',
+    tags:['EMV','EBT','Digital Wallet','3D Secure','Dynamic Descriptor','Split Capture','AVS Only','FSA','eWIC','Enterprise','eCommerce','Retail','Encryption 500','Encryption 501'],
     pros:[
       'Most flexible modern engine',
-      'Supports eCommerce',
-      'Supports EMV routes including North, Buypass, and Nashville',
-      'Supports EBT, FSA, eWIC, digital wallets, 3D Secure, split capture, and AVS only'
+      'Supports eCommerce features',
+      'Supports EMV routes including North, Nashville, and Buypass',
+      'Supports EBT, FSA, eWIC, digital wallets, 3D Secure, split capture, and AVS only',
+      'Supports 500 encryption for Omaha, Nashville, and North routes',
+      'Supports 501 encryption for Buypass and also works on Engine 22 Nashville',
+      'eWIC needs 501 encryption because eWIC only works on Buypass'
     ],
     cons:[
       'More complex setup',
       'eCommerce is on E22, but eCommerce is not the EMV route',
-      'Host capture routes do not support next-day funding',
+      'Host capture does not support next-day funding',
       'Must choose the correct frontend/backend route'
     ],
     recommendations:[
       'Use for eCommerce features.',
       'Use for Retail EMV with North, Nashville, or Buypass routes.',
-      'For NDF, avoid host capture because next-day funding is not supported on host capture.'
+      'Check the cutoff table for the exact frontend/backend route.',
+      'For encryption setup, confirm whether the route needs 500 or 501.'
     ]
   },
   {
     id:'25',
     num:'25',
-    name:'Engine 25 — Propay PayFac',
-    backend:'PayFac',
-    frontend:'Propay',
-    capture:'PayFac / ACH',
-    cutoff:'No Next Day Funding',
-    ndf:'Not Supported',
+    name:'Propay PayFac',
+    route:'PayFac',
+    backend:'North PayFac / Propay',
+    frontend:'PayFac',
+    cutoff:'No NDF',
+    batch:'N/A',
+    ndf:'Not supported',
+    ndfType:'no',
     desc:'PayFac and ACH processing path.',
-    tags:['ACH','PayFac','Card Not Present','No NDF'],
+    tags:['ACH','PayFac','Card Not Present'],
     pros:['Supports ACH','Good for PayFac setup','Useful for recurring or account-based payments'],
     cons:['No next-day funding','Not the EMV retail route'],
     recommendations:['Use for ACH or PayFac needs.']
@@ -632,59 +644,91 @@ const engines = [
   {
     id:'27',
     num:'27',
-    name:'Engine 27 — American Express Direct PIP',
+    name:'American Express Direct PIP',
+    route:'American Express',
     backend:'American Express',
     frontend:'Direct PIP',
-    capture:'Direct',
     cutoff:'3:00 AM',
-    ndf:'Supported / Confirm by setup',
+    batch:'Confirm setup',
+    ndf:'Supported / confirm setup',
+    ndfType:'mixed',
     desc:'Direct American Express route.',
-    tags:['AMEX','International','Multi Currency','Enhanced AVS','EMV'],
+    tags:['AMEX','International','Multi Currency','Enhanced AVS','EMV','DUKPT','Encryption'],
     pros:['Direct American Express processing','Supports international use cases','Enhanced AVS'],
     cons:['Specific to American Express','Not a general all-card route'],
     recommendations:['Use when direct AMEX processing is needed.']
   }
 ];
 
-const cutoffs = [
-  ['North','Omaha','4:00 PM','3:45 PM','NDF supported if not host capture and batched on time'],
-  ['Omaha','Omaha','7:00 PM','6:30 PM','NDF supported if batched on time'],
-  ['Nashville','Omaha','5:00 PM, but we see until 5:30','4:30 PM','NDF supported if not host capture and batched on time'],
-  ['Buypass','Omaha','1:30 PM','','NDF supported if not host capture and batched on time'],
-  ['All Platforms','North FACS','9:45 official, but should be set earlier','Fidelipay: 8:30 PM / Cardknox: 9:00 PM','NDF supported if not host capture and batched on time'],
-  ['Nash / North','North FDS','4:00 PM','3:45 PM','Host capture: NDF not supported'],
-  ['Buypass','North FDS','1:30 PM','','Host capture: NDF not supported'],
-  ['Nova','Elavon','10:00 PM','9:45 PM','NDF supported if batched on time'],
-  ['TSYS','Elavon','7:00 PM','6:00 PM','NDF supported if batched on time'],
-  ['TSYS','Vantiv','7:00 PM','6:00 PM','NDF supported if batched on time'],
-  ['Converge Gateway','Elavon','10:00 PM','9:00 PM','NDF supported if enabled and batched on time']
+var encryptionSupport = [
+  {
+    encryption:'500',
+    platforms:'Omaha, Nashville, North',
+    engine:'Engine 21 / Engine 22 depending route',
+    notes:'Engine 21 supports 500 encryption. Engine 22 supports 500 for Nashville, and North routes.'
+  },
+  {
+    encryption:'501',
+    platforms:'Buypass; also works on Engine 22 Nashville',
+    engine:'Engine 22',
+    notes:'Use 501 for Buypass. eWIC needs 501 encryption because eWIC only works on Buypass.'
+  }
 ];
 
-const filters = ['All','EMV','EBT','ACH','PayFac','TSYS','Elavon','Omaha','Vantiv','eCommerce','Retail','NDF','No NDF','Deprecated'];
-let activeFilter = 'All';
+var cutoffs = [
+  ['North','Omaha','4:00 PM','3:45 PM','NDF supported'],
+  ['Omaha','Omaha','7:00 PM','6:30 PM','NDF supported'],
+  ['Nashville','Omaha','5:00 PM, but we see until 5:30','4:30 PM','NDF supported when applicable'],
+  ['Buypass','Omaha','1:30 PM','','NDF supported when applicable'],
+  ['All Platforms','North FACS','9:45 official, but should be set earlier','Fidelipay: 8:30 PM / Cardknox: 9:00 PM','NDF supported when set correctly'],
+  ['Nash / North','North FDS','4:00 PM','3:45 PM','NDF supported'],
+  ['Buypass','North FDS','1:30 PM','','NDF supported when applicable'],
+  ['Nova','Elavon','10:00 PM','9:45 PM','NDF supported'],
+  ['TSYS','Elavon','7:00 PM','6:00 PM','NDF supported'],
+  ['TSYS','Vantiv','7:00 PM','6:00 PM','NDF supported'],
+  ['Converge Gateway','Elavon','10:00 PM','9:00 PM','NDF supported'],
+  ['Host Capture','Any backend','Varies','Varies','NDF not supported']
+];
+
+var bestUses = [
+  ['eCommerce','Start with Engine 22. eCommerce is on E22, but it is not the EMV route.'],
+  ['Retail EMV','Start with Engine 21, Engine 22, or Engine 20 for Elavon / TSYS EMV.'],
+  ['International','Look at Engine 14 or Engine 27.'],
+  ['ACH / PayFac','Look at Engine 25.'],
+  ['Traditional','Look at Engine 1 Omaha or Engine 1 TSYS / Elavon depending the route.']
+];
+
+var filters = ['All','EMV','EBT','ACH','PayFac','TSYS','Elavon','Omaha','eCommerce','Retail','International','Deprecated','Engine 1','Encryption 500','Encryption 501'];
+var activeFilter = 'All';
 
 function safeText(value){
-  return String(value).replace(/'/g, "\\'").replace(/"/g, '&quot;');
+  return String(value).replace(/[&<>"']/g, function(ch){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch];
+  });
 }
 
 function renderFlow(){
-  document.getElementById('flowMap').innerHTML = flow.map(col => `
-    <div class="lane">
-      <div class="lane-title ${col.color}">${col.title}</div>
-      ${col.items.map(i => `
-        <div class="item" onclick="openSimple('${safeText(i[0])}','${safeText(i[1])}','${safeText(col.title)}')">
-          <b>${i[0]}</b>
-          <small>${i[1]}</small>
-        </div>
-      `).join('')}
-    </div>
-  `).join('');
+  var html = '';
+  flow.forEach(function(col){
+    html += '<div class="lane">';
+    html += '<div class="lane-title ' + col.color + '">' + safeText(col.title) + '</div>';
+    col.items.forEach(function(i){
+      html += '<div class="item flow-item" data-title="' + safeText(i[0]) + '" data-desc="' + safeText(i[1]) + '" data-type="' + safeText(col.title) + '">';
+      html += '<b>' + safeText(i[0]) + '</b>';
+      html += '<small>' + safeText(i[1]) + '</small>';
+      html += '</div>';
+    });
+    html += '</div>';
+  });
+  document.getElementById('flowMap').innerHTML = html;
 }
 
 function renderFilters(){
-  document.getElementById('filters').innerHTML = filters.map(f => `
-    <button class="chip ${f === activeFilter ? 'active' : ''}" onclick="setFilter('${f}')">${f}</button>
-  `).join('');
+  var html = '';
+  filters.forEach(function(f){
+    html += '<button class="chip ' + (f === activeFilter ? 'active' : '') + '" data-filter="' + safeText(f) + '">' + safeText(f) + '</button>';
+  });
+  document.getElementById('filters').innerHTML = html;
 }
 
 function setFilter(f){
@@ -693,105 +737,116 @@ function setFilter(f){
   renderEngines();
 }
 
-function ndfClass(ndf){
-  if(ndf.toLowerCase().includes('not supported')) return 'ndf-no';
-  if(ndf.toLowerCase().includes('depends') || ndf.toLowerCase().includes('confirm') || ndf.toLowerCase().includes('not recommended')) return 'ndf-warn';
-  return 'ndf-yes';
-}
-
 function renderEngines(){
-  const q = document.getElementById('search').value.toLowerCase();
+  var q = document.getElementById('search').value.toLowerCase();
 
-  const filtered = engines.filter(e => {
-    const text = (e.num + ' ' + e.name + ' ' + e.desc + ' ' + e.tags.join(' ') + ' ' + e.backend + ' ' + e.frontend + ' ' + e.ndf + ' ' + e.cutoff).toLowerCase();
-    const searchMatch = text.includes(q);
-    const filterMatch = activeFilter === 'All' || e.tags.includes(activeFilter) || e.ndf.includes(activeFilter);
+  var filtered = engines.filter(function(e){
+    var text = (e.num + ' ' + e.name + ' ' + e.desc + ' ' + e.tags.join(' ') + ' ' + e.route + ' ' + e.backend + ' ' + e.frontend + ' ' + e.ndf).toLowerCase();
+    var searchMatch = text.indexOf(q) >= 0;
+    var filterMatch = activeFilter === 'All' || e.tags.indexOf(activeFilter) >= 0;
     return searchMatch && filterMatch;
   });
 
-  document.getElementById('engineCards').innerHTML = filtered.map(e => `
-    <div class="card" onclick="openEngine('${e.id}')">
-      <div class="pill-row">
-        <span class="pill engine-pill">Engine ${e.num}</span>
-        <span class="pill ${ndfClass(e.ndf)}">NDF: ${e.ndf}</span>
-      </div>
-      <h3>${e.name}</h3>
-      <p>${e.desc}</p>
+  document.getElementById('empty').style.display = filtered.length ? 'none' : 'block';
 
-      <div class="meta">
-        <div class="meta-box"><label>Backend</label><div>${e.backend}</div></div>
-        <div class="meta-box"><label>Frontend</label><div>${e.frontend}</div></div>
-        <div class="meta-box"><label>Cutoff / Default Batch</label><div>${e.cutoff}</div></div>
-      </div>
+  var html = '';
+  filtered.forEach(function(e){
+    var ndfClass = e.ndfType === 'yes' ? 'ndf-yes' : (e.ndfType === 'no' ? 'ndf-no' : 'ndf-mixed');
+    html += '<div class="card engine-card" data-engine-id="' + safeText(e.id) + '">';
+    html += '<span class="pill engine-pill">Engine ' + safeText(e.num) + '</span>';
+    html += '<span class="pill ' + ndfClass + '">' + safeText(e.ndf) + '</span>';
+    html += '<h3>' + safeText(e.name) + '</h3>';
+    html += '<p>' + safeText(e.desc) + '</p>';
+    html += '<div class="card-meta">';
+    html += '<div class="meta-line"><b>Backend</b>' + safeText(e.backend) + '</div>';
+    html += '<div class="meta-line"><b>Frontend</b>' + safeText(e.frontend) + '</div>';
+    html += '<div class="meta-line"><b>Cutoff / Batch</b>' + safeText(e.cutoff) + ' / ' + safeText(e.batch) + '</div>';
+    html += '</div>';
+    html += '<div class="badges">';
+    e.tags.slice(0,6).forEach(function(t){ html += '<span class="badge">' + safeText(t) + '</span>'; });
+    html += '</div></div>';
+  });
+  document.getElementById('engineCards').innerHTML = html;
+}
 
-      <div class="badges">
-        ${e.tags.slice(0,6).map(t => `<span class="badge">${t}</span>`).join('')}
-      </div>
-    </div>
-  `).join('');
+function renderEncryptionSupport(){
+  var html = '';
+  encryptionSupport.forEach(function(r){
+    html += '<tr>';
+    html += '<td><b>' + safeText(r.encryption) + '</b></td>';
+    html += '<td>' + safeText(r.platforms) + '</td>';
+    html += '<td>' + safeText(r.engine) + '</td>';
+    html += '<td>' + safeText(r.notes) + '</td>';
+    html += '</tr>';
+  });
+  document.getElementById('encryptionRows').innerHTML = html;
+}
+
+function renderBestUses(){
+  var html = '';
+  bestUses.forEach(function(b){
+    html += '<div class="best-card best-use-card" data-title="' + safeText(b[0]) + '" data-desc="' + safeText(b[1]) + '">';
+    html += '<b>' + safeText(b[0]) + '</b>';
+    html += '<small>' + safeText(b[1]) + '</small>';
+    html += '</div>';
+  });
+  document.getElementById('bestUseCards').innerHTML = html;
 }
 
 function renderCutoffs(){
-  document.getElementById('cutoffRows').innerHTML = cutoffs.map(r => `
-    <tr>
-      <td>${r[0]}</td>
-      <td>${r[1]}</td>
-      <td>${r[2]}</td>
-      <td>${r[3]}</td>
-      <td>${r[4]}</td>
-    </tr>
-  `).join('');
+  var html = '';
+  cutoffs.forEach(function(r){
+    html += '<tr>';
+    html += '<td>' + safeText(r[0]) + '</td>';
+    html += '<td>' + safeText(r[1]) + '</td>';
+    html += '<td>' + safeText(r[2]) + '</td>';
+    html += '<td>' + safeText(r[3]) + '</td>';
+    html += '<td>' + safeText(r[4]) + '</td>';
+    html += '</tr>';
+  });
+  document.getElementById('cutoffRows').innerHTML = html;
 }
 
 function openEngine(id){
-  const e = engines.find(x => x.id === id);
+  var e = null;
+  engines.forEach(function(item){ if(item.id === id){ e = item; } });
+  if(!e){ return; }
 
-  openModal(`
-    <h2>${e.name}</h2>
-    <p><b>Backend:</b> ${e.backend}</p>
-    <p><b>Frontend:</b> ${e.frontend}</p>
-    <p><b>Capture:</b> ${e.capture}</p>
-    <p><b>Cutoff / Default Batch:</b> ${e.cutoff}</p>
-    <p><b>NDF:</b> ${e.ndf}</p>
-    <p style="margin-top:12px">${e.desc}</p>
+  var ndfClass = e.ndfType === 'yes' ? 'ndf-yes' : (e.ndfType === 'no' ? 'ndf-no' : 'ndf-mixed');
 
-    ${e.capture.toLowerCase().includes('host') ? `<div class="note">Important: Host capture next-day funding is not supported.</div>` : ''}
+  var html = '';
+  html += '<h2>Engine ' + safeText(e.num) + ': ' + safeText(e.name) + '</h2>';
+  html += '<p><b>Route:</b> ' + safeText(e.route) + '</p>';
+  html += '<p><b>Backend:</b> ' + safeText(e.backend) + '</p>';
+  html += '<p><b>Frontend:</b> ' + safeText(e.frontend) + '</p>';
+  html += '<p><b>Cutoff:</b> ' + safeText(e.cutoff) + '</p>';
+  html += '<p><b>Default Batch:</b> ' + safeText(e.batch) + '</p>';
+  html += '<p><b>NDF:</b> <span class="pill ' + ndfClass + '">' + safeText(e.ndf) + '</span></p>';
+  html += '<p style="margin-top:12px">' + safeText(e.desc) + '</p>';
+  html += '<div class="badges">';
+  e.tags.forEach(function(t){ html += '<span class="badge">' + safeText(t) + '</span>'; });
+  html += '</div>';
+  html += '<div class="two-col">';
+  html += '<div class="box"><h4>Pros</h4><ul>';
+  e.pros.forEach(function(p){ html += '<li>' + safeText(p) + '</li>'; });
+  html += '</ul></div>';
+  html += '<div class="box"><h4>Cons / Watch Outs</h4><ul>';
+  e.cons.forEach(function(c){ html += '<li>' + safeText(c) + '</li>'; });
+  html += '</ul></div></div>';
+  html += '<div class="box" style="margin-top:15px"><h4>Recommendation</h4><ul>';
+  e.recommendations.forEach(function(r){ html += '<li>' + safeText(r) + '</li>'; });
+  html += '</ul></div>';
 
-    <div class="badges">
-      ${e.tags.map(t => `<span class="badge">${t}</span>`).join('')}
-    </div>
-
-    <div class="two-col">
-      <div class="box">
-        <h4>Pros</h4>
-        <ul>${e.pros.map(p => `<li>${p}</li>`).join('')}</ul>
-      </div>
-      <div class="box">
-        <h4>Cons / Watch Outs</h4>
-        <ul>${e.cons.map(c => `<li>${c}</li>`).join('')}</ul>
-      </div>
-    </div>
-
-    <div class="box" style="margin-top:15px">
-      <h4>Recommendation</h4>
-      <ul>${e.recommendations.map(r => `<li>${r}</li>`).join('')}</ul>
-    </div>
-  `);
+  openModal(html);
 }
 
+
 function openBest(title, text){
-  openModal(`
-    <h2>${title}</h2>
-    <p>${text}</p>
-  `);
+  openModal('<h2>' + safeText(title) + '</h2><p>' + safeText(text) + '</p>');
 }
 
 function openSimple(title, desc, type){
-  openModal(`
-    <h2>${title}</h2>
-    <p><b>${type}</b></p>
-    <p>${desc}</p>
-  `);
+  openModal('<h2>' + safeText(title) + '</h2><p><b>' + safeText(type) + '</b></p><p>' + safeText(desc) + '</p>');
 }
 
 function openModal(html){
@@ -803,19 +858,49 @@ function hideModal(){
   document.getElementById('modal').classList.remove('show');
 }
 
-function closeModal(e){
-  if(e.target.id === 'modal') hideModal();
-}
+function bindEvents(){
+  document.getElementById('search').addEventListener('input', renderEngines);
 
-document.getElementById('search').addEventListener('input', renderEngines);
-document.addEventListener('keydown', e => {
-  if(e.key === 'Escape') hideModal();
-});
+  document.getElementById('filters').addEventListener('click', function(e){
+    var btn = e.target.closest('.chip');
+    if(btn){ setFilter(btn.getAttribute('data-filter')); }
+  });
+
+  document.getElementById('flowMap').addEventListener('click', function(e){
+    var item = e.target.closest('.flow-item');
+    if(item){
+      openSimple(item.getAttribute('data-title'), item.getAttribute('data-desc'), item.getAttribute('data-type'));
+    }
+  });
+
+  document.getElementById('engineCards').addEventListener('click', function(e){
+    var card = e.target.closest('.engine-card');
+    if(card){ openEngine(card.getAttribute('data-engine-id')); }
+  });
+
+  document.getElementById('bestUseCards').addEventListener('click', function(e){
+    var card = e.target.closest('.best-use-card');
+    if(card){ openBest(card.getAttribute('data-title'), card.getAttribute('data-desc')); }
+  });
+
+  document.getElementById('closeModalBtn').addEventListener('click', hideModal);
+
+  document.getElementById('modal').addEventListener('click', function(e){
+    if(e.target.id === 'modal'){ hideModal(); }
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){ hideModal(); }
+  });
+}
 
 renderFlow();
 renderFilters();
 renderEngines();
+renderEncryptionSupport();
+renderBestUses();
 renderCutoffs();
+bindEvents();
 </script>
 
 </body>
